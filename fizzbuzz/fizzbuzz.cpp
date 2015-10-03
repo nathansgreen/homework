@@ -1,0 +1,18 @@
+// Copyright 2015 Nathan Green
+#include <string>
+#include <iostream>
+using std::string;
+using std::cout;
+
+int main(void) {
+    string s = string(10, ' ');
+    s.clear();
+    for (int i = 1; i < 101; i++) {
+        if (i % 3 == 0) s.append("Fizz");
+        if (i % 5 == 0) s.append("Buzz");
+        if (s.empty()) s.append(std::to_string(i));
+        s.append("\n");
+        cout << s;
+        s.clear();
+    }
+}
