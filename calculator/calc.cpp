@@ -5,39 +5,33 @@
 using std::cout;
 using std::setprecision;
 
+union Rslt {
+    float f;
+    char c;
+    Rslt() { c = 'E'; }
+    Rslt(float ff) { f = ff; }
+};
+
 int main(void) {
     float arg1, arg2;
     char oper;
     cout << "Enter a formula: ";
     std::cin >> arg1 >> oper >> arg2;
-    float rslt;
-    switch (oper) {
-    case '+':
-        rslt = arg1 + arg2;
-        break;
-    case '-':
-        rslt = arg1 - arg2;
-        break;
-    case '*':
-        rslt = arg1 * arg2;
-        break;
-    case '/':
-        if (arg2 == 0.0) {
-            cout << "ERRDIV0" << std::endl;
-            return 2;
-        }
-        rslt  = arg1 / arg2;
-        break;
-    case '^':
-        rslt = pow(arg1, arg2);
-        break;
-    case '%':
-        rslt = static_cast<int>(arg1) % static_cast<int>(arg2);
-        break;
-    default:
+    Rslt rslt;
+    rslt = oper == '+' ? arg1 + arg2 : rslt;
+    rslt = oper == '-' ? arg1 - arg2 : rslt;
+    rslt = oper == '*' ? arg1 * arg2 : rslt;
+    rslt = oper == '^' ? pow(arg1, arg2) : rslt;
+    rslt = oper == '%' ? static_cast<int>(arg1) % static_cast<int>(arg2) : rslt;
+    if (oper == '/' && arg2 == 0.0) {
+        cout << "ERRDIV0" << std::endl;
+        return 2;
+    }
+    rslt = oper == '/' ? arg1 / arg2 : rslt;
+    if (rslt.c == 'E') {
         cout << "BADOP" << oper << std::endl;
         return 1;
     }
     cout << arg1 << ' ' << oper << ' ' << arg2
-        << " = " << rslt << std::endl;
+        << " = " << rslt.f << std::endl;
 }
