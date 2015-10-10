@@ -8,7 +8,7 @@ cpp:
 	g++ -O2 fizzbuzz.cpp -o fizzbuzz.a
 	chmod u+x fizzbuzz.a
 c99:
-	gcc -O2 fizzbuzz.c -o a.out
+	gcc -O3 fizzbuzz.c -o a.out
 	chmod u+x a.out
 dmd:
 	dmd -O fizzbuzz.d -offizzbuzz.bin
