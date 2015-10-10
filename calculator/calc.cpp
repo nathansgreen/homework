@@ -32,7 +32,7 @@ int main(void) {
         rslt = pow(arg1, arg2);
         break;
     case '%':
-        rslt = arg1 % arg2;
+        rslt = static_cast<int>(arg1) % static_cast<int>(arg2);
         break;
     default:
         cout << "BADOP" << oper << std::endl;
